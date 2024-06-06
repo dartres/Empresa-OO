@@ -9,18 +9,43 @@
 </head>
 <body>
     <header>
-    
+      
         <nav class="nav-header">
             <ul>
+                <li><a href="../index.html">Home</a></li>
                 <li>
-                    <a href="index.html">Home</a></li>
-                <li><a href="./view/formCargo.html">Cargo</a></li>
-                <li><a href="view/formDepartamento.html">Departamento</a></li>
-                <li><a href="">Funcionário</a></li>
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">Cargo</button>
+                        <div id="myDropdown" class="dropdown-content">
+                          <a href="./view/formCargo.php">Cadastro</a>
+                          <a href="./view/alteracaoCargo.php">Alteração</a>
+                          <a href="./view/exclusaoCargo.php">Exclusão</a>
+                        </div>
+                      </div>
+                      </li>  
+                <li><div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Departamento</button>
+                    <div id="myDropdown" class="dropdown-content">
+                       <a href="./view/formDepartamento.php">Cadastro</a>
+                      <a href="./view/alteracaoDepartamento.php">Alteração</a>
+                      <a href="./view/exclusaoDepartamento.php">Exclusão</a>
+                    </div>
+                  </div>
+                 </li>
+                <li><div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Funcionário</button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="./view/formFuncionario.php">Cadastro</a>
+                      <a href="./view/alteracaoFuncionario.php">Alteração</a>
+                      <a href="./view/exclusaoFuncionario.php">Exclusão</a>
+                    </div>
+                  </div>
+                  </li>
+                  <li><a href="view/consulta.php">Consulta</a></li>
             </ul>
         </nav>
     </header>
-    <main></main>
+    <main>    <CENTER><H1>ESCOLHA UMA DAS OPÇÕES DO MENU</H1></CENTER></main>
     <footer>
             Brenda Caroline, Gisele Araújo, Kauany Oliveira.
     </footer>

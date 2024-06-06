@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Departamento</title>
+    <title>Funcionário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
     crossorigin="anonymous">
@@ -52,25 +52,50 @@
           </ul>
       </nav>
   </header>
-    <main>
-        <form method="POST" action="../Controller/recebeDepartamento.php">
-            <center>
-                <div style="height: 18vh;"></div>
-            <div class="centro" style="height: 250px; border: solid black 5px; width: 40%; padding: 35px 50px; border-radius: 20px;"> 
-                <h1>DEPARTAMENTO</h1>   
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Digite departamento:</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" name="txtNomeDepartamento" 
-          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;" required><br>
-          <button type="submit" class="btn btn-primary">Enviar</button>
-        </div></center>
-        
+    <div class="container">
+        <h2>Alterar Cargo</h2>
+        <?php
+        require_once '../model/classConexao.php';
+
+        $conexao = new Conexao();
+        $pdo = $conexao->conectar();
+
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $query = $pdo->prepare("SELECT * FROM cargo WHERE codCargo = :id");
+            $query->bindParam(':id', $id);
+            $query->execute();
+            $cargo = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($cargo) {
+                echo '
+                <form method="POST" action="alteracaoCargo.php">
+                    <input type="hidden" name="codCargo" value="'.$cargo['codCargo'].'">
+                    <div class="mb-3">
+                        <label for="nomeCargo" class="form-label">Nome do Cargo</label>
+                        <input type="text" class="form-control" id="nomeCargo" name="nomeCargo" value="'.$cargo['nomeCargo'].'" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="update_cargo">Salvar Alterações</button>
+                </form>';
+            } else {
+                echo '<p>Cargo não encontrado.</p>';
+            }
+        }
+
+        if (isset($_POST['update_cargo'])) {
+            $codCargo = $_POST['codCargo'];
+            $nomeCargo = $_POST['nomeCargo'];
+            $query = $pdo->prepare("UPDATE cargo SET nomeCargo = :nome WHERE codCargo = :id");
+            $query->bindParam(':nome', $nomeCargo);
+            $query->bindParam(':id', $codCargo);
+            if ($query->execute()) {
+                echo '<div class="alert alert-success" role="alert">Cargo atualizado com sucesso!</div>';
+            } else {
+                echo '<div class="alert alert-danger" role="alert">Erro ao atualizar cargo.</div>';
+            }
+        }
+        ?>
+        <a href="consulta.php" class="btn btn-secondary">Voltar</a>
     </div>
-      </form>
-    </main>
-    <footer>
-            Brenda Caroline, Gisele Araújo, Kauany Oliveira.
-    </footer>
-   
 </body>
 </html>

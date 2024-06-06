@@ -24,8 +24,6 @@
                       <button onclick="myFunction()" class="dropbtn">Cargo</button>
                       <div id="myDropdown" class="dropdown-content">
                         <a href="formCargo.php">Cadastro</a>
-                        <a href="alteracaoCargo.php">Alteração</a>
-                        <a href="exclusaoCargo.php">Exclusão</a>
                       </div>
                     </div>
                     </li>  
@@ -33,8 +31,6 @@
                   <button onclick="myFunction()" class="dropbtn">Departamento</button>
                   <div id="myDropdown" class="dropdown-content">
                      <a href="formDepartamento.php">Cadastro</a>
-                    <a href="alteracaoDepartamento.php">Alteração</a>
-                    <a href="exclusaoDepartamento.php">Exclusão</a>
                   </div>
                 </div>
                </li>
@@ -42,12 +38,18 @@
                   <button onclick="myFunction()" class="dropbtn">Funcionário</button>
                   <div id="myDropdown" class="dropdown-content">
                     <a href="formFuncionario.php">Cadastro</a>
-                    <a href="alteracaoFuncionario.php">Alteração</a>
-                    <a href="exclusaoFuncionario.php">Exclusão</a>
                   </div>
                 </div>
                 </li>
-                <li><a href="consulta.php">Consulta</a></li>
+                <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Consulta</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="Consulta.php">Departamento e
+                Cargo</a>
+                <a href="consultaFuncionario.php">Funcionário</a>
+                  </div>
+                </div>
+                </li>
           </ul>
       </nav>
   </header>
@@ -60,7 +62,7 @@
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Digite cargo:</label><br>
           <input type="text" class="txtNomeCargo" name="txtNomeCargo" aria-describedby="emailHelp"
-           style="border: solid black 1px;  "><br><br>
+           style="border: solid black 1px;  " required><br><br>
        <button type="submit" class="btn btn-primary">Enviar</button> </div>
         
     </div>

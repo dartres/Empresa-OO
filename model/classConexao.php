@@ -12,7 +12,7 @@ Class Conexao {
     {     
         try{
             $this->pdo = new PDO("mysql:dbname=".$this->dbname.";host=".$this->host,$this->user, $this->senha);
-        echo "Conexão Realizada ♥ ;)";
+        echo "Conexão Realizada ;)";
         }
         catch(PDOException $e){
             echo"Erro com parâmetro no banco de dados! :("      .$e->getMessage();

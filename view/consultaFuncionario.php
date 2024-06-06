@@ -31,7 +31,7 @@
 
 </head>
 <body>
-    <header>
+<header>
       
       <nav class="nav-header">
           <ul>
@@ -72,86 +72,54 @@
   </header>
   <main>
   <center>
- <div class="container">   
-  <div>
-    <h2>Departamento</h2>
-    
-    <table style="border: 1px solid black ">
+<div>
+    <h2>Funcionário</h2>
+    <table style=" border:1px solid black ">
         <tr>
-            <th>Código</th>
-            <th>Nome do Departamento</th>
+            <th>Funcional</th>
+            <th>Cpf</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+            <th>Cod Departamento</th>
+            <th>Cod Cargo</th>
             <th>Alteração</th>
             <th>Exclusão</th>
         </tr>
         <?php
         require_once '../model/classConexao.php';
-
         $conexao = new Conexao();
         $pdo = $conexao->conectar();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_departamento'])) {
-            $codDepartamento = $_POST['codDepartamento'];
-            $pdo->query("DELETE FROM departamento WHERE codDepartamento = '$codDepartamento'");
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_funcionario'])) {
+            $funcional = $_POST['funcional'];
+            $pdo->query("DELETE FROM funcionario WHERE funcional = '$funcional'");
         }
 
-        $consulta = $pdo->query("SELECT * FROM departamento");
+        $consulta = $pdo->query("SELECT * FROM funcionario");
 
         while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
+            echo "<td>".$row['funcional']."</td>";
+            echo "<td>".$row['cpf']."</td>";
+            echo "<td>".$row['nome']."</td>";
+            echo "<td>".$row['telefone']."</td>";
+            echo "<td>".$row['endereco']."</td>";
             echo "<td>".$row['codDepartamento']."</td>";
-            echo "<td>".$row['nomeDepartamento']."</td>";
-            echo '<td><button class="btn btn-primary" onclick="window.location.href=\'../controller/alteracaoDepartamento.php?id='.$row['codDepartamento'].'\'">Alterar</button></td>';
+            echo "<td>".$row['codCargo']."</td>";
+            echo '<td><button class="btn btn-primary" onclick="window.location.href=\'../controller/alteracaoFuncionario.php?id='.$row['funcional'].'\'">Alterar</button></td>';
             echo '<td>
                     <form method="POST" style="display:inline;">
-                        <input type="hidden" name="codDepartamento" value="'.$row['codDepartamento'].'">
-                        <button type="submit" name="delete_departamento" class="btn btn-danger">Excluir</button>
+                        <input type="hidden" name="funcional" value="'.$row['funcional'].'">
+                        <button type="submit" name="delete_funcionario" class="btn btn-danger">Excluir</button>
                     </form>
                   </td>';
             echo "</tr>";
         }
         ?>
     </table>
-    </div>  
-
-    <div class="container">
-      <div>
-    <h2>Cargo</h2>
-    <table style=" border: 1px solid black ">
-        <tr>
-            <th>Código</th>
-            <th>Nome do Cargo</th>
-            <th>Alteração</th>
-            <th>Exclusão</th>
-        </tr>
-        <?php
-        require_once '../controller/consulta.php';
-
-        $consulta = mostrarCargo();
-
-
-        if(count($consulta)>0){
-          for($i = 0 ; $i < count($consulta); $i++){
-            echo"<tr>";
-            foreach($consulta[$i] as $key -> $value){
-             echo"<td>". $value. "</td>"; }?>
-        
-         
-
-          <td><a href="../controller/alteracaoCargo.php?id_up=
-          <?php echo $consulta[$i]['codCargo'];?>">ALTERAR</a></td>
-          
-          <td><a href="../controller/excluiCargo.php?id_ex=          
-          <?php echo $consulta[$i]['codCargo'];?>">EXCLUIR</a></td>
-        <?php
-      echo "</tr>";  
-      }}
-        ?>
-    </table>
-      </div>    
-
-  
-      </div>
-</center>
+    </div> 
+    </center>
       </main>
   <footer>
             Brenda Caroline, Gisele Araújo, Kauany Oliveira.

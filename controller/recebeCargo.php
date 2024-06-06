@@ -7,15 +7,42 @@
     <link rel="stylesheet" href="../view/style.css">
 </head>
 <body>    
-    <header>
+<header>
       
-    
       <nav class="nav-header">
           <ul>
               <li><a href="../index.html">Home</a></li>
-              <li><a href="../view/formCargo.html">Cargo</a></li>
-              <li><a href="../view/formDepartamento.html">Departamento</a></li>
-              <li><a href="../view/formFuncionario.html">Funcionário</a></li>
+              <li>
+                  <div class="dropdown">
+                      <button onclick="myFunction()" class="dropbtn">Cargo</button>
+                      <div id="myDropdown" class="dropdown-content">
+                        <a href="formCargo.php">Cadastro</a>
+                      </div>
+                    </div>
+                    </li>  
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Departamento</button>
+                  <div id="myDropdown" class="dropdown-content">
+                     <a href="../view/formDepartamento.php">Cadastro</a>
+                  </div>
+                </div>
+               </li>
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Funcionário</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="../view/formFuncionario.php">Cadastro</a>
+                  </div>
+                </div>
+                </li>
+                <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Consulta</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="../view/consulta.php">Departamento e
+                Cargo</a>
+                <a href="../view/consultaFuncionario.php">Funcionário</a>
+                  </div>
+                </div>
+                </li>
           </ul>
       </nav>
   </header>

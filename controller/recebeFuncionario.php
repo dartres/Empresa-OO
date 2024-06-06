@@ -16,9 +16,7 @@
                   <div class="dropdown">
                       <button onclick="myFunction()" class="dropbtn">Cargo</button>
                       <div id="myDropdown" class="dropdown-content">
-                        <a href="../view/formCargo.php">Cadastro</a>
-                        <a href="../view/alteracaoCargo.php">Alteração</a>
-                        <a href="../view/exclusaoCargo.php">Exclusão</a>
+                        <a href="formCargo.php">Cadastro</a>
                       </div>
                     </div>
                     </li>  
@@ -26,8 +24,6 @@
                   <button onclick="myFunction()" class="dropbtn">Departamento</button>
                   <div id="myDropdown" class="dropdown-content">
                      <a href="../view/formDepartamento.php">Cadastro</a>
-                    <a href="../view/alteracaoDepartamento.php">Alteração</a>
-                    <a href="../view/exclusaoDepartamento.php">Exclusão</a>
                   </div>
                 </div>
                </li>
@@ -35,20 +31,18 @@
                   <button onclick="myFunction()" class="dropbtn">Funcionário</button>
                   <div id="myDropdown" class="dropdown-content">
                     <a href="../view/formFuncionario.php">Cadastro</a>
-                    <a href="../view/alteracaoFuncionario.php">Alteração</a>
-                    <a href="../view/exclusaoFuncionario.php">Exclusão</a>
                   </div>
                 </div>
                 </li>
                 <li><div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn">Consulta</button>
                   <div id="myDropdown" class="dropdown-content">
-                     <a href="formDepartamento.html">Cargo</a>
-                    <a href="#">Departamento</a>
-                    <a href="#">Funcionário</a>
+                    <a href="../view/consulta.php">Departamento e
+                Cargo</a>
+                <a href="../view/consultaFuncionario.php">Funcionário</a>
                   </div>
                 </div>
-               </li>
+                </li>
           </ul>
       </nav>
   </header>

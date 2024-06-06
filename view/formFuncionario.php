@@ -1,6 +1,5 @@
 <?php
-require_once'../model/classFuncionario.php';
-$func = new Funcionario();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,43 +16,45 @@ $func = new Funcionario();
      <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+<header>
       
-        <nav class="nav-header">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li>
-                    <div class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn">Cargo</button>
-                        <div id="myDropdown" class="dropdown-content">
-                          <a href="formCargo.php">Cadastro</a>
-                          <a href="alteracaoCargo.php">Alteração</a>
-                          <a href="exclusaoCargo.php">Exclusão</a>
-                        </div>
+      <nav class="nav-header">
+          <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li>
+                  <div class="dropdown">
+                      <button onclick="myFunction()" class="dropbtn">Cargo</button>
+                      <div id="myDropdown" class="dropdown-content">
+                        <a href="formCargo.php">Cadastro</a>
                       </div>
-                      </li>  
-                <li><div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Departamento</button>
-                    <div id="myDropdown" class="dropdown-content">
-                       <a href="formDepartamento.php">Cadastro</a>
-                      <a href="alteracaoDepartamento.php">Alteração</a>
-                      <a href="exclusaoDepartamento.php">Exclusão</a>
                     </div>
+                    </li>  
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Departamento</button>
+                  <div id="myDropdown" class="dropdown-content">
+                     <a href="formDepartamento.php">Cadastro</a>
                   </div>
-                 </li>
+                </div>
+               </li>
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Funcionário</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="formFuncionario.php">Cadastro</a>
+                  </div>
+                </div>
+                </li>
                 <li><div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Funcionário</button>
-                    <div id="myDropdown" class="dropdown-content">
-                      <a href="formFuncionario.php">Cadastro</a>
-                      <a href="alteracaoFuncionario.php">Alteração</a>
-                      <a href="exclusaoFuncionario.php">Exclusão</a>
-                    </div>
+                  <button onclick="myFunction()" class="dropbtn">Consulta</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="Consulta.php">Departamento e
+                Cargo</a>
+                <a href="consultaFuncionario.php">Funcionário</a>
                   </div>
-                  </li>
-                  <li><a href="consulta.php">Consulta</a></li>
-            </ul>
-        </nav>
-    </header>
+                </div>
+                </li>
+          </ul>
+      </nav>
+  </header>
     <main>
         <form method="POST" action="../Controller/recebeFuncionario.php">
           <section id="funcionario">
@@ -64,26 +65,28 @@ $func = new Funcionario();
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Digite nome:</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="txtNomeFuncionario" 
-          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;"><br>
+          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;" required><br>
 
           <label for="exampleInputEmail1" class="form-label">Digite CPF:</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="txtCpf" 
-          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;"><br>
+          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;" required><br>
 
           <label for="exampleInputEmail1" class="form-label">Digite telefone:</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="txtTelefone" 
-          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;"><br>
+          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;" required><br>
 
           <label for="exampleInputEmail1" class="form-label">Digite endereço:</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="txtEndereco" 
-          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;"><br>
+          aria-describedby="emailHelp" style="border: solid black 1px; width: 70%; border-radius: 0%;" required><br>
           
           <label>Selecione o cargo:</label>
           <select name="txtCargo">
             <?php
+            require_once'../model/classFuncionario.php';
+            $func = new Funcionario();
                 $id = $func->consultaCargo();
             ?>
-            <option value="valor">Selecione um cargo</option>
+            <option value="valor">Selecione um cargo:</option>
             <?php
                for($i = 0; $i < count($id); $i++){
             ?><option value = "<?php echo $id[$i]['codCargo'];?>">

@@ -9,43 +9,30 @@
 </head>
 <body>
   <header>
-      
     <nav class="nav-header">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>
-                <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Cargo</button>
-                    <div id="myDropdown" class="dropdown-content">
-                      <a href="./view/formCargo.php">Cadastro</a>
-                    </div>
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li>
+              <div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Cadastro</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="view/create/formCargo.php">Cargo</a>
+                    <a href="view/create/formDepartamento.php">Departamento</a>
+                    <a href="view/create/formFuncionario.php">Funcionário</a>
                   </div>
-                  </li>  
+                </div>
+                </li>  
             <li><div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Departamento</button>
-                <div id="myDropdown" class="dropdown-content">
-                   <a href="./view/formDepartamento.php">Cadastro</a>
-                </div>
+              <button onclick="myFunction()" class="dropbtn">Consulta</button>
+              <div id="myDropdown" class="dropdown-content">
+                <a href="view/read/consultaCargo.php">Cargo</a>
+                <a href="view/read/consultaDepartamento.php">Departamento</a>
+                <a href="view/read/consultaFuncionario.php">Funcionário</a>
               </div>
-             </li>
-            <li><div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Funcionário</button>
-                <div id="myDropdown" class="dropdown-content">
-                  <a href="./view/formFuncionario.php">Cadastro</a>
-                </div>
-              </div>
-              </li>
-              <li><div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Consulta</button>
-                <div id="myDropdown" class="dropdown-content">
-                  <a href="./view/consulta.php">Departamento e
-              Cargo</a>
-              <a href="./view/consultaFuncionario.php">Funcionário</a>
-                </div>
-              </div>
-              </li>
-        </ul>
-    </nav>
+            </div>
+            </li>
+      </ul>
+  </nav>
 </header>
     <main>    <CENTER><H1>ESCOLHA UMA DAS OPÇÕES DO MENU</H1></CENTER></main>
     <footer>

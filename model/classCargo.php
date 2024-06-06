@@ -1,5 +1,5 @@
 <?php 
-require_once '../model/classConexao.php';
+require_once 'classConexao.php';
 Class Cargo
 {
     private $pdo;
@@ -15,52 +15,44 @@ Class Cargo
         $insere->execute();
     }
 
-    public function validaCargo ($nomeCargo){
-        $valida = $this ->pdo ->prepare ("select codCargo from cargo where nomeCargo = :c");
-        $valida ->bindValue (":c", $nomeCargo);
-        $valida ->execute();
+    public function validaCargo($nomeCargo){
+        $valida = $this->pdo->prepare("select codCargo from cargo where nomeCargo = :c");
+        $valida->bindValue(":c", $nomeCargo);
+        $valida -> execute();
 
+        if ($valida->rowCount()>0){
+            echo"<script>alert('DCargo já cadastrado, verifique duplicidade')</script>";
+        }
+        else {
+            $this->insereCargo($nomeCargo);
+            echo "<script>alert('Cadastrado o novo cargo com sucesso!')</script>";
+        }
     }
 
-  /*  public function atualizaCargo($nomeCargo){ 
-        $comandoSql = "update cargo set nomeCargo = ? where codCargo = ?"; 
-        $valores = array($this->$nomeCargo); 
+    public function alterarCargo($codCargo, $nomeCargo){ 
+        $comandoSql = "UPDATE cargo SET nomeCargo = :nomeCargo WHERE codCargo = :codCargo"; 
         $exec = $this->pdo->prepare($comandoSql); 
-        $exec->execute($valores); 
+        $exec->bindValue(":nomeCargo", $nomeCargo);
+        $exec->bindValue(":codCargo", $codCargo);
+        return $exec->execute(); 
         } 
         
-        public function excluiCargo($codigo){ 
-        $comandoSql = "delete from cargo where codCargo = ?"; 
-        $valores = array($this->$codigo); 
-        $exec = $this->pdo->prepare($comandoSql); 
-        $exec->execute($valores); 
+        public function excluirCargo($codCargo){ 
+            $comandosql = $this->pdo->prepare("DELETE FROM cargo WHERE codCargo = :codCargo");
+            $comandosql->bindParam(':codCargo', $codCargo);
+            return $comandosql->execute();
         } 
-        public function consultaCargo(){
-            $retorna = array();
-            $le = $this->pdo->query("Select * from cargo ");
-            $retorna = $le->fetchAll(PDO::FETCH_ASSOC);
-            return $retorna;
-        }
-        public function validaExclusao ($codCargo){
 
-            $valida = $this->pdo->prepare("select cargo.codCargo fros cargo inner join funcionario on cargo.codtarga funcionario.codCargo where cargo.codCargo - ic"); Bvalida-hindValus("c", SendCargo); Svalide-> axecute();
-            
-            if($valida-rowCount()>0){
-                echo"<scriptralert('Cargo associado a um funcionario, proibida exclusao')</script>";
-            }
-            else            
-                $this->excluir ($codCargo) 
-            // header("location../view/consulta.php"); echo"<script>alert('EXCLUIDO')</script>"
-            echo"<scriptralert('Excluido')</script>";
+        public function consultarCargo() {
+            $consulta = $this->pdo->query("SELECT * FROM cargo");
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
         }
-    
-        public function excluir ($codCargo)
-            {          
-                $exclui= $this->pdo->prepare("delete from cargo where codCargo = :c");
-                $exclui -> bindValue (":c, $codCargo");
-                $exclui = executa();         
 
-            }          
-            
-}*/
+        public function getCargo($codCargo) {
+            $query = $this->pdo->prepare("SELECT * FROM cargo WHERE codCargo = :id");
+            $query->bindParam(':id', $codCargo);
+            $query->execute();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }
+}
 ?>

@@ -1,5 +1,5 @@
 <?php 
-require_once '../model/classConexao.php';
+require_once 'classConexao.php';
 Class Departamento
 {
     private $pdo;
@@ -14,18 +14,57 @@ Class Departamento
         $insere->bindValue(":n",$nomeDepartamento);
         $insere->execute();
     }
-public function validaDepartamento($nomeDepartamento){
-    $valida = $this->pdo->prepare("select codDepartamento from departamento where nomeDepartamento = :depto");
-    $valida->bindValue(":depto", $nomeDepartamento);
-    $valida -> execute();
+    
+    public function validaDepartamento($nomeDepartamento){
+        $valida = $this->pdo->prepare("select codDepartamento from departamento where nomeDepartamento = :depto");
+        $valida->bindValue(":depto", $nomeDepartamento);
+        $valida -> execute();
 
-    if ($valida->rowCount()>0){
-        echo"<script>alert('Departamento já cadastrado, verifique duplicidade')</script>";
+        if ($valida->rowCount()>0){
+            echo"<script>alert('Departamento já cadastrado, verifique duplicidade')</script>";
+        }
+        else {
+            $this->insereDepartamento($nomeDepartamento);
+            echo "<script>alert('Cadastrado o novo departamento com sucesso!')</script>";
+        }
     }
-    else {
-        $this->insereDepartamento($nomeDepartamento);
-        echo "<script>alert('Cadastrado o novo departamento com sucesso!')</script>";
+
+    public function consultarDepartamento(){
+        $retorna= array();
+        $le = $this->pdo->query("select * from departamento order by nomeDepartamento");
+        $retorna = $le-> fetchAll(PDO::FETCH_ASSOC);
+        return $retorna;
     }
-}
+
+    public function excluirDepartamento($codDepartamento) {
+        $comandosql = $this->pdo->prepare("DELETE FROM departamento WHERE codDepartamento = :codDepartamento");
+        $comandosql->bindParam(':codDepartamento', $codDepartamento);
+
+        if ($comandosql->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+
+    public function alterarDepartamento($codDepartamento,$nomeDepartamento) {
+        $retorna= array();
+        $comandosql = $this->pdo->prepare("UPDATE departamento SET nomeDepartamento = :nome WHERE codDepartamento = :id");
+        $comandosql->bindParam(':nome', $nomeDepartamento);
+        $comandosql->bindParam(':id', $codDepartamento);
+        
+        if ($comandosql->execute()) {
+            return $retorna;
+        } else {
+            return false;
+        }
+    }
+
+    public function getDepartamento($codDepartamento) {
+        $query = $this->pdo->prepare("SELECT * FROM departamento WHERE codDepartamento = :id");
+        $query->bindParam(':id', $codDepartamento);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

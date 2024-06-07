@@ -10,29 +10,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
      crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="../style.css">
+     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-    <nav class="nav-header">
+      
+      <nav class="nav-header">
           <ul>
-              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../index.html">Home</a></li>
               <li>
                   <div class="dropdown">
-                      <button onclick="myFunction()" class="dropbtn">Cadastro</button>
+                      <button onclick="myFunction()" class="dropbtn">Cargo</button>
                       <div id="myDropdown" class="dropdown-content">
-                        <a href="../create/formCargo.php">Cargo</a>
-                        <a href="../create/formDepartamento.php">Departamento</a>
-                        <a href="../create/formFuncionario.php">Funcionário</a>
+                        <a href="formCargo.php">Cadastro</a>
                       </div>
                     </div>
                     </li>  
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Departamento</button>
+                  <div id="myDropdown" class="dropdown-content">
+                     <a href="formDepartamento.php">Cadastro</a>
+                  </div>
+                </div>
+               </li>
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Funcionário</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="formFuncionario.php">Cadastro</a>
+                  </div>
+                </div>
+                </li>
                 <li><div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn">Consulta</button>
                   <div id="myDropdown" class="dropdown-content">
-                    <a href="../read/consultaCargo.php">Cargo</a>
-                    <a href="../read/consultaDepartamento.php">Departamento</a>
-                    <a href="../read/consultaFuncionario.php">Funcionário</a>
+                    <a href="Consulta.php">Departamento e
+                Cargo</a>
+                <a href="consultaFuncionario.php">Funcionário</a>
                   </div>
                 </div>
                 </li>
@@ -42,20 +55,22 @@
     <div class="container mt-5">
         <h2>Alterar Funcionário</h2>
         <?php
-        require_once '../../controller/update/alteraFuncionario.php';
+        require_once '../model/classConexao.php';
 
-        $controller = new alteraFuncionario();
+        $conexao = new Conexao();
+        $pdo = $conexao->conectar();
 
-        $funcionario = $controller->getFuncionario($funcional, $cpf, $nome, $telefone, $endereco, $codDepartamento, $codCargo);
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $query = $pdo->prepare("SELECT * FROM funcionario WHERE funcional = :id");
+            $query->bindParam(':id', $id);
+            $query->execute();
+            $funcionario = $query->fetch(PDO::FETCH_ASSOC);
 
-        $cargos = $controller->consultarCargo();
-
-        $departamentos = $controller->consultarDepartamento();
-        
             if ($funcionario) {
                 echo '
                 <form method="POST" action="alteracaoFuncionario.php">
-                    <input type="hidden" class="form-control" name="funcional" value="'.$funcionario['funcional'].'">
+                    <input type="hidden" name="funcional" value="'.$funcionario['funcional'].'">
                     <div class="mb-3">
                         <label for="cpf" class="form-label">CPF</label>
                         <input type="text" class="form-control" id="cpf" name="cpf" value="'.$funcionario['cpf'].'" required>
@@ -73,33 +88,42 @@
                         <input type="text" class="form-control" id="endereco" name="endereco" value="'.$funcionario['endereco'].'" required>
                     </div>
                     <div class="mb-3">
-                        <label for="codDepartamento" class="form-label">Departamento</label>
-                        <input type="text" class="form-control" id="codDepartamento" name="codDepartamento" value="'.$funcionario['nome_departamento'].'" required>
+                        <label for="codDepartamento" class="form-label">Código do Departamento</label>
+                        <input type="text" class="form-control" id="codDepartamento" name="codDepartamento" value="'.$funcionario['codDepartamento'].'" required>
                     </div>
                     <div class="mb-3">
-                    <label for="codCargo" class="form-label">Cargo</label>
-                    <select class="form-select" id="codCargo" name="codCargo" required>'; 
-                        foreach ($cargos as $cargo) {
-                            echo '<option value="'.$cargo['codCargo'].'" '.(($funcionario['codCargo'] == $cargo['codCargo']) ? 'selected' : '').'>'.$cargo['nomeCargo'].'</option>';
-                        }
-                    echo '</select>';
-                echo '</div>
-                <div class="mb-3">
-                    <label for="codDepartamento" class="form-label">Departamento</label>
-                    <select class="form-select" id="codDepartamento" name="codDepartamento" required>'; 
-                        foreach ($departamentos as $departamento) {
-                            echo '<option value="'.$departamento['codDepartamento'].'" '.(($funcionario['codDepartamento'] == $departamento['codDepartamento']) ? 'selected' : '').'>'.$departamento['nomeDepartamento'].'</option>';
-                        }
-                    echo '</select>';
-                echo '</div>
+                        <label for="codCargo" class="form-label">Código do Cargo</label>
+                        <input type="text" class="form-control" id="codCargo" name="codCargo" value="'.$funcionario['codCargo'].'" required>
+                    </div>
                     <button type="submit" class="btn btn-primary" name="update_funcionario">Salvar Alterações</button>
                 </form>';
             } else {
                 echo '<p>Funcionário não encontrado.</p>';
             }
-        
+        }
 
-       
+        if (isset($_POST['update_funcionario'])) {
+            $funcional = $_POST['funcional'];
+            $cpf = $_POST['cpf'];
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+            $endereco = $_POST['endereco'];
+            $codDepartamento = $_POST['codDepartamento'];
+            $codCargo = $_POST['codCargo'];
+            $query = $pdo->prepare("UPDATE funcionario SET cpf = :cpf, nome = :nome, telefone = :telefone, endereco = :endereco, codDepartamento = :codDepartamento, codCargo = :codCargo WHERE funcional = :funcional");
+            $query->bindParam(':cpf', $cpf);
+            $query->bindParam(':nome', $nome);
+            $query->bindParam(':telefone', $telefone);
+            $query->bindParam(':endereco', $endereco);
+            $query->bindParam(':codDepartamento', $codDepartamento);
+            $query->bindParam(':codCargo', $codCargo);
+            $query->bindParam(':funcional', $funcional);
+            if ($query->execute()) {
+                echo '<div class="alert alert-success" role="alert">Funcionário atualizado com sucesso!</div>';
+            } else {
+                echo '<div class="alert alert-danger" role="alert">Erro ao atualizar funcionário.</div>';
+            }
+        }
         ?>
         <a href="consultaFuncionario.php" class="btn btn-secondary mt-3">Voltar</a>
     </div>

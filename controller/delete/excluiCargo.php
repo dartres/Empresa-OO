@@ -8,17 +8,18 @@ class excluiCargo {
         $this->model = new Cargo();
     }
 
-public function excluirCargo($codCargo) {
-        return $this->model->excluirCargo($codCargo);
+    public function validaExclusaoCargo($codCargo){
+        $this->model->validaExclusaoCargo($codCargo);
     }
+
 }
 
 $excluir = new excluiCargo();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_cargo'])) {
     $codCargo = $_POST['codCargo'];
-    $excluir->excluirCargo($codCargo);
-    header('Location: ../../view/read/consultaCargo.php');
+    
+    $excluir->validaExclusaoCargo($codCargo);
     }
 
 ?>

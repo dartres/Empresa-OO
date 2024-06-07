@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,38 +10,50 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
      crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="../style.css">
+     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form method="POST" action="../../controller/create/recebeCargo.php">
+    <form method="POST" action="../Controller/recebeCargo.php">
     <header>
-    <nav class="nav-header">
+      
+      <nav class="nav-header">
           <ul>
-              <li><a href="../../index.html">Home</a></li>
+              <li><a href="../index.html">Home</a></li>
               <li>
                   <div class="dropdown">
-                      <button onclick="myFunction()" class="dropbtn">Cadastro</button>
+                      <button onclick="myFunction()" class="dropbtn">Cargo</button>
                       <div id="myDropdown" class="dropdown-content">
-                        <a href="formCargo.php">Cargo</a>
-                        <a href="formDepartamento.php">Departamento</a>
-                        <a href="formFuncionario.php">Funcionário</a>
+                        <a href="formCargo.php">Cadastro</a>
                       </div>
                     </div>
                     </li>  
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Departamento</button>
+                  <div id="myDropdown" class="dropdown-content">
+                     <a href="formDepartamento.php">Cadastro</a>
+                  </div>
+                </div>
+               </li>
+              <li><div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">Funcionário</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a href="formFuncionario.php">Cadastro</a>
+                  </div>
+                </div>
+                </li>
                 <li><div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn">Consulta</button>
                   <div id="myDropdown" class="dropdown-content">
-                    <a href="../read/consultaCargo.php">Cargo</a>
-                    <a href="../read/consultaDepartamento.php">Departamento</a>
-                    <a href="../read/consultaFuncionario.php">Funcionário</a>
+                    <a href="Consulta.php">Departamento e
+                Cargo</a>
+                <a href="consultaFuncionario.php">Funcionário</a>
                   </div>
                 </div>
                 </li>
           </ul>
       </nav>
   </header>
-
-        
+    
     <main>
         <center>
            <div style="height: 18vh;"></div>
@@ -51,8 +62,9 @@
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Digite cargo:</label><br>
           <input type="text" class="txtNomeCargo" name="txtNomeCargo" aria-describedby="emailHelp"
-           style="border: solid black 1px;  " required maxlength="70"><br><br>
+           style="border: solid black 1px;  " required><br><br>
        <button type="submit" class="btn btn-primary">Enviar</button> </div>
+        
     </div>
     </form>
     </center>

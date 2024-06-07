@@ -29,6 +29,24 @@ Class Departamento
         }
     }
 
+    public function validaExclusaoDepartamento($codDepartamento){
+        $valida = $this->pdo->prepare("SELECT funcionario.codDepartamento from departamento 
+        inner join funcionario on departamento.codDepartamento = funcionario.codDepartamento 
+        where departamento.codDepartamento = :depto");
+        $valida->bindValue(":depto", $codDepartamento);
+        $valida -> execute();
+
+        if ($valida->rowCount()>0){
+            echo"<script>alert('Departamento associado a outra tabela, verificar relação')</script>";
+            echo "<script>window.history.go(-1);</script>";
+        }
+        else {
+            $this->excluirDepartamento($codDepartamento);
+            echo"<script>alert('Departamento excluído com sucesso!')</script>";
+            echo "<script>window.location.href = '../../view/read/consultaDepartamento.php';</script>";
+        }
+    }
+
     public function consultarDepartamento(){
         $retorna= array();
         $le = $this->pdo->query("select * from departamento order by nomeDepartamento");

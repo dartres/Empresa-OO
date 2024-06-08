@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -71,10 +71,6 @@
                     <div class="mb-3">
                         <label for="endereco" class="form-label">Endereço</label>
                         <input type="text" class="form-control" id="endereco" name="endereco" value="'.$funcionario['endereco'].'" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="codDepartamento" class="form-label">Departamento</label>
-                        <input type="text" class="form-control" id="codDepartamento" name="codDepartamento" value="'.$funcionario['nome_departamento'].'" required>
                     </div>
                     <div class="mb-3">
                     <label for="codCargo" class="form-label">Cargo</label>
